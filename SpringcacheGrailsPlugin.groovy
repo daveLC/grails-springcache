@@ -113,7 +113,11 @@ class SpringcacheGrailsPlugin {
 			springcacheFlushingAspect(FlushingAspect) {
 				springcacheService = ref("springcacheService")
 			}
-
+			
+            springcacheEvictCacheKeyAspect(EvictCacheKeyAspect) {
+				springcacheService = ref("springcacheService")
+			}
+			
 			springcacheFilter(GrailsFragmentCachingFilter) {
 				springcacheService = ref("springcacheService")
 				cacheManager = ref("springcacheCacheManager")

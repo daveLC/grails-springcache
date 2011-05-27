@@ -33,6 +33,20 @@ class SpringcacheService implements ApplicationContextAware {
 	boolean autoCreateCaches = true // TODO: config?
 
 	/**
+	 * Flushes the specified key from the specified cache.
+	 * @param cacheName The name of the cache to use.
+	 * @param key The key of the element to flush.
+	 */
+	void evictKeyFromCache(String cacheName, Serializable key) {
+		if (log.isDebugEnabled()) log.debug "Evicting $key from $cacheName"
+		if (!enabled) return
+		Ehcache cache = springcacheCacheManager.getEhcache(cacheName)
+		if (cache) {
+			cache.remove(key)
+		}
+	}	
+	
+	/**
 	 * Flushes the specified cache or set of caches.
 	 * @param cacheNamePatterns can be a single cache name or a regex pattern or a Collection/array of them.
 	 */
